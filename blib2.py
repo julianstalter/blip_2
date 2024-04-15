@@ -3,7 +3,7 @@ from PIL import Image
 from transformers import AutoProcessor, Blip2ForConditionalGeneration
 import torch
 
-url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Fra_Filippo_Lippi_014.jpg/548px-Fra_Filippo_Lippi_014.jpg' 
+url = 'https://live.staticflickr.com/4905/32725757538_54941411dc_z.jpg' 
 print("Img url: " + url)
 image = Image.open(requests.get(url, stream=True).raw).convert('RGB')   
 
