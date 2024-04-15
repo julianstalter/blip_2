@@ -3,7 +3,7 @@ from PIL import Image
 from transformers import AutoProcessor, Blip2ForConditionalGeneration
 import torch
 
-url = 'https://uploads5.wikiart.org/images/michelangelo/bacchus-1497.jpg' 
+url = 'https://upload.wikimedia.org/wikipedia/commons/6/68/Fra_Filippo_Lippi_014.jpg' 
 print("Img url: " + url)
 image = Image.open(requests.get(url, stream=True).raw).convert('RGB')   
 
@@ -27,7 +27,7 @@ def run_prompt(prompt, question=False):
         inputs = processor(image, text="" + prompt + " A", return_tensors="pt").to(device, torch.float16)
 
 
-    generated_ids = model.generate(**inputs, max_new_tokens=20)
+    generated_ids = model.generate(**inputs, max_new_tokens=50)
     generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0].strip()
     print("Result: " + generated_text)
     return(generated_text)
@@ -38,7 +38,7 @@ run_prompt("the image is composed of")
 run_prompt("the colorscheme is")
 run_prompt("the iconography of the painting is")
 run_prompt("the painting invokes feelings of")
-run_prompt("there is golden ratio in the image at")
+run_prompt("the art historical context of this painting is")
 run_prompt("in the painting is something special at the position of")
 run_prompt("what is the most prominent object in the painting")
 run_prompt("what object in the painting is missing", question=True)
@@ -48,7 +48,6 @@ run_prompt("what is the prominent feeling attached to the painting", question=Tr
 run_prompt("what in the painting is scary", question=True)
 run_prompt("in the future the objects in the painting will")
 run_prompt("the most interesting object in the painting is")
-run_prompt("at the position of a golden ratio there is")
 run_prompt("in the center of the painting is")
 run_prompt("the red object in the painting is")
 run_prompt("the most frequent colour is")
