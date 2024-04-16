@@ -1,13 +1,13 @@
 import requests
 from PIL import Image
-from transformers import AutoProcessor, Blip2ForConditionalGeneration
+from transformers import BlipProcessor, Blip2ForConditionalGeneration
 import torch
 
 url = 'https://live.staticflickr.com/4905/32725757538_54941411dc_z.jpg' 
 print("Img url: " + url)
 image = Image.open(requests.get(url, stream=True).raw).convert('RGB')   
 
-processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
 # by default `from_pretrained` loads the weights in float32
 # we load in float16 instead to save memory
 model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large", torch_dtype=torch.float16) 
