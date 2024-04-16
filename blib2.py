@@ -7,10 +7,10 @@ url = 'https://live.staticflickr.com/4905/32725757538_54941411dc_z.jpg'
 print("Img url: " + url)
 image = Image.open(requests.get(url, stream=True).raw).convert('RGB')   
 
-processor = AutoProcessor.from_pretrained("Salesforce/blip2-opt-2.7b")
+processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
 # by default `from_pretrained` loads the weights in float32
 # we load in float16 instead to save memory
-model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip2-opt-2.7b", torch_dtype=torch.float16) 
+model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large", torch_dtype=torch.float16) 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)
